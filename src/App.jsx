@@ -1,9 +1,14 @@
+import Logo from "./Logo";
+
 const App = () => {
   return(
     <>
-    <Header/>
-    <Home/>
-    <Footer/>
+    <div className="">
+      <Logo/>
+      <Header/>
+      <Home/>
+      <Footer/>
+    </div>
     </>
   )
 }
