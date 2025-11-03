@@ -1,4 +1,8 @@
-import Navbar from './Header';
+import Logo from "./Logo";
+import Header from "./Header";
+import Home from "./Home";
+import Footer from "./Footer";
+
 import React from 'react';
 
 const App = () => {
@@ -7,18 +11,21 @@ const App = () => {
 
   // Placeholder (tidak perlu array items, dsb)
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar
+    <>
+      <Header
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
       />
+    <Home selectedCategory={selectedCategory} />
+    <Footer />
+    {/* placeholder sementara sampai Home selesai
       <main className="container mx-auto py-8 px-4">
-        {/* Placeholder/fallback */}
+        Placeholder/fallback
         <div className="text-gray-500 text-center mt-20 text-xl">
           Fitur dan data menu akan muncul setelah integrasi/merge selesai.
         </div>
-      </main>
-    </div>
+      </main>*/}
+    </>
   );
 };
 
