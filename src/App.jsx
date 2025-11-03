@@ -1,9 +1,7 @@
 const App = () => {
   return(
     <>
-    <Header/>
     <Home/>
-    <Footer/>
     </>
   )
 }
