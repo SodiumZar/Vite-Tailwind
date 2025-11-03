@@ -1,57 +1,67 @@
-import Category from './Category';
-// import Logo jika atau pake gambar logo
-// import Logo from '../Logo';
+import { useState, useRef, useEffect } from 'react';
 
-const Header = ({
-  selectedCategory,
-  onCategoryChange,
-  sortBy,
-  onSortChange
-}) => {
+const categories = [
+  { key: 'all', label: 'All' },
+  { key: 'desserts', label: 'Desserts' },
+  { key: 'drinks', label: 'Drinks' },
+  { key: 'main_dish', label: 'Main Dish' },
+  { key: 'snacks', label: 'Snacks' },
+];
+
+const Navbar = ({ selectedCategory, onCategoryChange }) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropRef.current && !dropRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
-    <header className="w-full py-8 px-4 flex flex-col border-b border-[#F0A202]/30 bg-white">
-      {/* Header row: kiri judul, kanan search bar */}
-      <div className="flex flex-row items-center justify-between max-w-5xl w-full mx-auto gap-4">
-        {/* <Logo className="mr-4" /> */}
-            
-        <h1 className="text-5xl font-bold text-[#F18805] text-center leading-tight mt-3">
-            The Best Food
-            <span className="block text-[#D95D39]">On The Market</span>
-        </h1>
-
-        {/* Search Bar disini */}
-
-        {/* <Search /> */}
-
-        {/* Sorting Control */}
-        <div className="ml-auto">
-          <label className="mr-2 text-sm font-medium text-[#0E1428]/80">Sort by</label>
-          <select
-            value={sortBy}
-            onChange={(e) => onSortChange(e.target.value)}
-            className="px-3 py-2 border border-[#F18805] rounded-md text-[#0E1428] bg-white focus:outline-none focus:ring-2 focus:ring-[#F0A202]"
-          >
-            <option value="name_asc">Name (A→Z)</option>
-            <option value="name_desc">Name (Z→A)</option>
-            <option value="price_asc">Price (low→high)</option>
-            <option value="price_desc">Price (high→low)</option>
-          </select>
+    <nav className="w-full bg-white border-b border-[#F0A202]/30 px-4">
+      <div className="flex items-center justify-between max-w-5xl mx-auto py-4 gap-4">
+        {/* Logo */}
+        <a href="/" className="flex items-center gap-2 select-none">
+          <img src="/src/assets/logo.png" alt="Logo" className="h-10 w-10 object-contain rounded-full shadow-md" />
+          <span className="text-xl font-bold text-[#F18805]">FoodMarket</span>
+        </a>
+        {/* Navbar items */}
+        <div className="flex items-center gap-4 relative">
+          <a href="#" className="text-[#0E1428] font-semibold hover:text-[#F18805] transition">Home</a>
+          <div className="relative" ref={dropRef}>
+            <button
+              className="inline-flex items-center px-4 py-2 rounded-md border border-[#F18805] bg-white text-[#F18805] font-medium hover:bg-[#F0A202] hover:text-white transition focus:outline-none"
+              onClick={() => setDropdownOpen((x) => !x)}
+              aria-haspopup="true"
+              aria-expanded={dropdownOpen}
+            >
+              Category
+              <svg className={`ml-2 h-4 w-4 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+            </button>
+            {dropdownOpen && (
+              <ul className="absolute right-0 mt-2 z-50 w-44 bg-white rounded-lg border border-[#F0A202]/40 shadow-lg py-1">
+                {categories.map((cat) => (
+                  <li key={cat.key}>
+                    <button onClick={() => { onCategoryChange(cat.key); setDropdownOpen(false); }}
+                      className={`block w-full text-left px-4 py-2 text-[#0E1428] hover:bg-[#F18805]/20 hover:text-[#F18805] transition ${selectedCategory === cat.key ? 'font-bold text-[#F18805]' : ''}`}
+                    >
+                      {cat.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
-
       </div>
-      {/* deskripsi singkat*/}
-      <div className="w-full flex flex-col items-center mt-5 mb-2">
-        <p className="text-lg text-[#0E1428]/80 text-center max-w-2xl">
-          Discover your favorite food and drinks, served fresh and delicious, from our curated menu collection.
-        </p>
-      </div>
-      {/* Kategori */}
-      <div className="flex justify-center w-full mt-3">
-        <Category selected={selectedCategory} onChange={onCategoryChange} />
-      </div>
-    </header>
+    </nav>
   );
 };
 
-export default Header;
+export default Navbar;
 
