@@ -1,8 +1,7 @@
+import Footer from "./Footer/index.jsx";
 const App = () => {
   return(
     <>
-    <Header/>
-    <Home/>
     <Footer/>
     </>
   )
