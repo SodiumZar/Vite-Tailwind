@@ -18,13 +18,6 @@ const App = () => {
       />
     <Home selectedCategory={selectedCategory} />
     <Footer />
-    {/* placeholder sementara sampai Home selesai
-      <main className="container mx-auto py-8 px-4">
-        Placeholder/fallback
-        <div className="text-gray-500 text-center mt-20 text-xl">
-          Fitur dan data menu akan muncul setelah integrasi/merge selesai.
-        </div>
-      </main>*/}
     </>
   );
 };
