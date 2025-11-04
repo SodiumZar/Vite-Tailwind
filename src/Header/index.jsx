@@ -32,7 +32,13 @@ const Navbar = ({ selectedCategory, onCategoryChange }) => {
         </a>
         {/* Navbar items */}
         <div className="flex items-center gap-4 relative">
-          <a href="#" className="text-[#0E1428] font-semibold hover:text-[#F18805] transition">Home</a>
+          <button
+            type="button"
+            onClick={() => onCategoryChange && onCategoryChange('all')}
+            className="text-[#0E1428] font-semibold hover:text-[#F18805] transition bg-transparent border-0 p-0"
+          >
+            Home
+          </button>
           <div className="relative" ref={dropRef}>
             <button
               className="inline-flex items-center px-4 py-2 rounded-md border border-[#F18805] bg-white text-[#F18805] font-medium hover:bg-[#F0A202] hover:text-white transition focus:outline-none"
