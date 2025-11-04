@@ -4,7 +4,7 @@ const Footer = () => {
       <div className="grid md:grid-cols-4 gap-10 mt-20">
         {/* Brand */}
         <div className="ml-50">
-          <h2 className="text-xl font-bold">FOOD DISTORTION</h2>
+          <h2 className="text-xl font-bold">FoodMarket</h2>
           <p className="text-sm opacity-80 mt-1">Discover. Eat. Enjoy.</p>
         </div>
 
